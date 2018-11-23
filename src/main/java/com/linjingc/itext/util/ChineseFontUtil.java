@@ -19,7 +19,7 @@ import java.io.File;
 public class ChineseFontUtil implements FontProvider {
     @Override
     public Font getFont(String s, String s1, boolean b, float v, int i, BaseColor baseColor) {
-       return getChineseFont();
+        return getChineseFont();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ChineseFontUtil implements FontProvider {
         return false;
     }
 
-    public Font getChineseFont(){
+    public Font getChineseFont() {
         //获取文件根地址
         String uploadPath = this.getClass().getClassLoader().getResource("").getPath() + File.separator;
         //获取字体解决中文乱码问题

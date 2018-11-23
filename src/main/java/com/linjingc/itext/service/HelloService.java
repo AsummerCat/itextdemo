@@ -35,9 +35,6 @@ public class HelloService {
         try {
             //1、创建文档对象实例
             Document document = new Document();
-            document.addAuthor("一只写Bug的猫");
-            document.addCreationDate();
-            document.addHeader("标题", "内容");
 
             //获取字体解决中文乱码问题
             Font fontChinese = chineseFontUtil.getChineseFont();
@@ -58,11 +55,8 @@ public class HelloService {
             //关闭pdf
             document.close();
 
-        } catch (IOException e) {
-            log.info("io异常");
-        } catch (DocumentException e) {
-
-            log.info("itext异常{}", e);
+        } catch (IOException | DocumentException e) {
+            log.info("导出错误{}", e);
         }
     }
 

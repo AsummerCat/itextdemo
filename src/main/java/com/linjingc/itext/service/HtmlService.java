@@ -133,14 +133,10 @@ public class HtmlService {
             String html = getHtmlTemplatesFill(map);
             ByteArrayInputStream bin = new ByteArrayInputStream(html.getBytes("UTF-8"));
             XMLWorkerHelper.getInstance().parseXHtml(pdfWriter, document, bin, null, Charset.forName("UTF-8"), chineseFontUtil);
-
             //关闭pdf
             document.close();
 
-        } catch (IOException e) {
-            log.info("io异常");
-        } catch (DocumentException e) {
-
+        } catch (IOException | DocumentException e) {
             log.info("iText异常{}", e);
         }
     }
@@ -153,10 +149,6 @@ public class HtmlService {
         try {
             //1、创建文档对象实例
             Document document = new Document();
-            document.addTitle("测试导出");
-            document.addHeader("哈哈","哈哈");
-            document.addAuthor("小明");
-            document.addCreationDate();
             //页面大小
             Rectangle rect = new Rectangle(PageSize.B4.rotate());
             //页面背景色
@@ -164,7 +156,10 @@ public class HtmlService {
 
             //创建一个pdf 输出到浏览器
             response.setContentType("application/pdf");
+            //这里表示直接返回下载
             //response.setHeader("Content-Disposition", "attachment;filename=测试.pdf");
+
+            //生成文件
             PdfWriter pdfWriter = PdfWriter.getInstance(document, response.getOutputStream());
             //打开pdf
             document.open();
@@ -179,9 +174,7 @@ public class HtmlService {
             //关闭pdf
             document.close();
 
-        } catch (IOException e) {
-            log.info("io异常");
-        } catch (DocumentException e) {
+        } catch (IOException | DocumentException e) {
             log.info("iText异常{}", e);
         }
     }
